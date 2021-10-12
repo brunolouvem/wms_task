@@ -5,13 +5,12 @@ defmodule WmsTask.Repo.Migrations.CreateOrders do
     create table(:orders) do
       add :number, :string
       add :order_updated, :naive_datetime
-      add :picking_numbers, :string
+      add :picking_numbers, {:array, :string}
       add :packing_number, :string
-      add :pickings, :map
-      add :packing, :map
+      add :pickings, {:array, :jsonb}
+      add :packing, :string
 
       timestamps()
     end
-
   end
 end
