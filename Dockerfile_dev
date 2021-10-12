@@ -1,0 +1,15 @@
+###############
+# Build stage #
+###############
+FROM elixir:1.12
+
+RUN apt-get update -y && \
+    apt-get install -y build-essential git postgresql-client && \
+    mix local.hex --force && \
+    mix local.rebar --force 
+
+WORKDIR /app
+
+EXPOSE 4000
+
+CMD ["/app/entrypoint.sh"]

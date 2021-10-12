@@ -1,20 +1,56 @@
 # WmsTask
 
-To start your Phoenix server:
+## Development
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `npm install` inside the `assets` directory
-  * Start Phoenix endpoint with `mix phx.server`
+### Requirements
+- `Docker`
+- `docker-compose`
+- `make` (optional)
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+### Up environment
+```bash
+make up 
+# or
+docker-compose up
+```
+### Down environment
+```bash
+make down
+# or
+docker-compose down
+```
+### Accessing container shell
+```bash
+make dev_shell
+# or
+docker exec -it wms_tasks bash
+```
+### Accessing container shell
+```bash
+make test
+# or
+docker exec -it wms_tasks bash -c "mix test"
+```
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## Production simulation
 
-## Learn more
+To simulate production in your development environment, you can use `make build_prod` and `make run_prod` with postgres container still up.
+### Requirements
+- `Docker` (only for build)
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+
+```bash
+docker buid . -t wms_task:latest
+# or
+make build_prod
+```
+
+### Simulation
+
+```bash
+docker-composer stop postgres
+```
+
+```bash
+make run_prod
+```
