@@ -1,23 +1,29 @@
 defmodule WmsTaskWeb.PageControllerTest do
   use WmsTaskWeb.ConnCase
 
-  test "GET /", %{conn: conn} do
-    conn = get(conn, "/")
-    assert html_response(conn, 200) =~ "Welcome to Phoenix!"
+  alias WmsTask.Expectations
+
+  setup do
+    Expectations.expect_all_sync_calls()
   end
 
   test "GET /orders/live", %{conn: conn} do
-    conn = get(conn, "/orders/live")
-    response = json_response(conn, 200)
-    assert response |> IO.inspect
+    response =
+      get(conn, "/orders/live")
+      |> json_response(200)
+
+    refute is_nil(response["orders"])
     assert length(response["orders"]) == 10
   end
 
   test "sync", %{conn: conn} do
-    WmsTaskWeb.PageController.sync_orders(5000)
-    conn = get(conn, "/orders")
-    response = json_response(conn, 200)
-    assert response |> IO.inspect
+    WmsTask.Orders.sync_orders(100_000)
+
+    response =
+      get(conn, "/orders")
+      |> json_response(200)
+
+    refute is_nil(response["orders"])
     assert length(response["orders"]) == 10
   end
 end

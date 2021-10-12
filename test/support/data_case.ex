@@ -16,6 +16,8 @@ defmodule WmsTask.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       alias WmsTask.Repo
@@ -28,10 +30,10 @@ defmodule WmsTask.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(WmsTask.Repo)
+    :ok = Sandbox.checkout(WmsTask.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(WmsTask.Repo, {:shared, self()})
+      Sandbox.mode(WmsTask.Repo, {:shared, self()})
     end
 
     :ok
