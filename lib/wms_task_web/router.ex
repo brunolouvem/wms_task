@@ -14,9 +14,8 @@ defmodule WmsTaskWeb.Router do
   end
 
   scope "/", WmsTaskWeb do
-    pipe_through :browser
+    pipe_through :api
 
-    get "/", PageController, :index
     get "/orders/live", PageController, :get_orders_live
     get "/orders", PageController, :get_orders
   end
