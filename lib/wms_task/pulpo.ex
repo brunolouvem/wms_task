@@ -10,6 +10,7 @@ defmodule WmsTask.Pulpo do
   @doc """
   Get all order in Pulpo from interval.
   """
+  @spec get_orders(nil | integer()) :: list()
   def get_orders(interval) do
     auth_headers = Adapter.auth()
 
@@ -22,6 +23,7 @@ defmodule WmsTask.Pulpo do
   @doc """
   Update order list with picking array for each order.
   """
+  @spec update_orders_with_pickings(list()) :: list()
   def update_orders_with_pickings(orders) do
     auth_headers = Adapter.auth()
 
@@ -29,6 +31,9 @@ defmodule WmsTask.Pulpo do
       Logger.info("Getting pickings for order #{order_num}")
 
       pickings = Adapter.get_picking(order_num, auth_headers)
+
+      Logger.info("Pickings found for order #{order_num}: #{inspect(pickings, pretty: true)}")
+
       Map.put(order, "pickings", pickings["picking_orders"])
     end)
     |> Enum.map(fn {:ok, result} -> result end)
@@ -37,6 +42,7 @@ defmodule WmsTask.Pulpo do
   @doc """
   Update order list with packing for each order.
   """
+  @spec update_orders_with_packings(list()) :: list()
   def update_orders_with_packings(orders) do
     auth_headers = Adapter.auth()
 
@@ -47,6 +53,8 @@ defmodule WmsTask.Pulpo do
         Adapter.get_packing(order_num, auth_headers)
         |> Map.get("packing_orders", [])
         |> List.first()
+
+      Logger.info("Packing found for order #{order_num}: #{inspect(packing, pretty: true)}")
 
       Map.put(order, "packing", packing)
     end)

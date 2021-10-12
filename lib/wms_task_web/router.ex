@@ -16,8 +16,8 @@ defmodule WmsTaskWeb.Router do
   scope "/", WmsTaskWeb do
     pipe_through :api
 
-    get "/orders/live", PageController, :get_orders_live
-    get "/orders", PageController, :get_orders
+    get "/orders/live", OrderController, :get_orders_live
+    get "/orders", OrderController, :get_orders
   end
 
   # Other scopes may use custom stacks.

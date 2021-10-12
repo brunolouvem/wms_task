@@ -12,6 +12,14 @@ defmodule WmsTask.OrdersTest do
       assert [%Orders.Order{} | _] = Orders.get_orders()
     end
 
+    test "successfully sync orders with many pickings" do
+      Expectations.expect_all_sync_calls(:with_pickings)
+
+      Orders.sync_orders()
+
+      assert [%Orders.Order{pickings: [_ | _]} | _] = Orders.get_orders()
+    end
+
     test "successfully sync orders but empty list returned from pulpo" do
       Expectations.expect_no_orders()
       Expectations.expect_auth(2)

@@ -71,18 +71,13 @@ defmodule WmsTask.Expectations do
   @doc """
   Expect one get_picking call with many pickings for order
   """
-  def expect_pickings(:more) do
+  def expect_pickings(:with_pickings) do
     "test/support/fixtures/more_pickings.json"
     |> do_expect_pickings()
   end
 
   def expect_pickings(:empty) do
     "test/support/fixtures/no_pickings.json"
-    |> do_expect_pickings()
-  end
-
-  def expect_pickings(:one) do
-    "test/support/fixtures/one_picking.json"
     |> do_expect_pickings()
   end
 
@@ -99,12 +94,12 @@ defmodule WmsTask.Expectations do
   @doc """
   Expect all calls from sync
   """
-  def expect_all_sync_calls do
+  def expect_all_sync_calls(picking_return \\ :empty) do
     expect_orders()
     |> Map.fetch!("sales_orders")
     |> Enum.each(fn _ ->
       expect_auth(2)
-      expect_pickings(:empty)
+      expect_pickings(picking_return)
       expect_packings()
     end)
   end

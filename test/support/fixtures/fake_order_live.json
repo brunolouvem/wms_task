@@ -1,0 +1,17 @@
+{
+    "items_count": 3,
+    "order_num": "felipe_picking_sales_order_num_3",
+    "packing": {
+        "attributes": {},
+        "sequence_number": "PA-0000001"
+    },
+    "pickings": [
+        {
+            "attributes": {},
+            "sequence_number": "PI-0000003"
+        }
+    ],
+    "shipping_address": "Runte-Lueilwitz",
+    "status": "picking",
+    "warehouse_name": "felipe_warehouse_1"
+}

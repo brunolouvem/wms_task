@@ -1,4 +1,8 @@
-defmodule WmsTaskWeb.PageController do
+defmodule WmsTaskWeb.OrderController do
+  @moduledoc """
+  Controller module for orders endpoints
+  """
+
   use WmsTaskWeb, :controller
 
   require Logger

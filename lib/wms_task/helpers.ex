@@ -1,10 +1,11 @@
 defmodule WmsTask.Helpers do
   @moduledoc """
-  Helpers keeps helper functions to support context
+  Helpers keep helper functions to support context
   """
 
   require Logger
 
+  @spec map_to_order_model(nil | maybe_improper_list | map) :: list | map()
   def map_to_order_model(orders) when is_list(orders) do
     Enum.map(orders, &map_to_order_model(&1))
   end
