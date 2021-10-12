@@ -1,4 +1,4 @@
-defmodule WmsTaskWeb.PageControllerTest do
+defmodule WmsTaskWeb.OrderControllerTest do
   use WmsTaskWeb.ConnCase
 
   alias WmsTask.Expectations

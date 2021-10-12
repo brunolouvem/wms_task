@@ -30,7 +30,7 @@ cc:
 # Run application suite test in container
 .PHONY: test
 test:
-	docker exec -it wms_tasks bash -c "MIX_ENV=test mix test"
+	docker exec -it wms_tasks bash -c "MIX_ENV=test mix test --cover"
 
 # Run application in development mode
 .PHONY: run_dev

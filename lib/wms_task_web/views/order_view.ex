@@ -1,4 +1,6 @@
-defmodule WmsTaskWeb.PageView do
+defmodule WmsTaskWeb.OrderView do
+  @moduledoc false
+
   use WmsTaskWeb, :view
 
   def render("orders_model.json", %{orders: orders}) do

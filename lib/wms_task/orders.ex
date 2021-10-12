@@ -25,6 +25,7 @@ defmodule WmsTask.Orders do
     |> Pulpo.update_orders_with_packings()
   end
 
+  @spec insert_batch_orders(list()) :: {:ok, Ecto.Multi.t()} | {:error, any()}
   defp insert_batch_orders(orders) do
     orders
     |> Enum.with_index()
