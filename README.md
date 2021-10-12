@@ -52,13 +52,13 @@ make build_prod
 Start development containers or provide a database connection.
 
 ```sh
-docker-composer up -d
+docker-compose up -d
 ```
 
 Stop development elixir container if it is running to release `4000` port.
 
 ```sh
-docker-composer stop elixir
+docker-compose stop elixir
 ```
 
 Run make command to start production simulation.
