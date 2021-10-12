@@ -1,11 +1,12 @@
 use Mix.Config
 
+# Get database url from environment variable and put fallback if developer will run elixir locally
+database_url =
+  System.get_env("DATABASE_URL", "postgres://postgres:postgres@localhost:5432/wms_task")
+
 # Configure your database
 config :wms_task, WmsTask.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "wms_task_dev",
-  hostname: "localhost",
+  url: database_url <> "_dev",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
